@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Button from "./ui/Button";
 
 export default function Header() {
   return (
-    <header className="flex justify-between px-4 py-5 bg-white dark:bg-gray-500">
+    <header className="flex justify-between px-4 py-5 bg-white dark:bg-gray-500 h-16 md:h-20">
       <div className="flex items-center gap-4">
         <svg
           className="md:hidden"
