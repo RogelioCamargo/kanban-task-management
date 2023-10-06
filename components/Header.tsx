@@ -2,7 +2,7 @@ import Button from "./ui/Button";
 
 export default function Header() {
   return (
-    <header className="flex justify-between px-4 py-5 bg-white dark:bg-gray-500 h-16 md:h-20">
+    <header className="flex justify-between px-4 py-7 bg-white dark:bg-gray-500 h-16 md:h-20 border-b border-gray-400">
       <div className="flex items-center gap-4">
         <svg
           className="md:hidden"
@@ -10,7 +10,7 @@ export default function Header() {
           height="25"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g fill="#635FC7" fill-rule="evenodd">
+          <g fill="#635FC7" fillRule="evenodd">
             <rect width="6" height="25" rx="2" />
             <rect opacity=".75" x="9" width="6" height="25" rx="2" />
             <rect opacity=".5" x="18" width="6" height="25" rx="2" />
@@ -26,7 +26,7 @@ export default function Header() {
 					>
 						<path
 							stroke="#635FC7"
-							stroke-width="2"
+							strokeWidth="2"
 							fill="none"
 							d="m1 1 4 4 4-4"
 						/>
@@ -49,7 +49,7 @@ export default function Header() {
           <span className="hidden md:inline">+ Add New Task</span>
         </Button>
         <svg width="5" height="20" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#828FA3" fill-rule="evenodd">
+          <g fill="#828FA3" fillRule="evenodd">
             <circle cx="2.308" cy="2.308" r="2.308" />
             <circle cx="2.308" cy="10" r="2.308" />
             <circle cx="2.308" cy="17.692" r="2.308" />
