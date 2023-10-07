@@ -9,9 +9,9 @@ export default function Home() {
   const board = boards[0];
 
   return (
-    <div className="h-full flex">
+    <div className="grid-custom-columns h-screen md:grid overflow-hidden">
       <Aside />
-      <div className="w-full">
+      <div>
         <Header />
         {/* <main className="p-3 text-center text-gray-300 flex flex-col items-center justify-center gap-6 lg:gap-8 bg-gray-100 dark:bg-gray-600">
 					<p className="text-lg font-bold">

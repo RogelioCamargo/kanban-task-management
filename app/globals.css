@@ -39,6 +39,16 @@ main {
   main {
     height: calc(100% - 80px);
   }
+
+  .grid-custom-columns {
+    grid-template-columns: 260px calc(100% - 260px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-custom-columns {
+    grid-template-columns: 300px calc(100% - 300px);
+  }
 }
 
 /* Slider CSS */
@@ -56,7 +66,6 @@ main {
   height: 0;
 }
 
-
 .slider {
   position: absolute;
   cursor: pointer;
@@ -64,7 +73,7 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-	background-color: #635FC7;
+  background-color: #635fc7;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -83,7 +92,7 @@ main {
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #635FC7;
+  box-shadow: 0 0 1px #635fc7;
 }
 
 input:checked + .slider:before {
