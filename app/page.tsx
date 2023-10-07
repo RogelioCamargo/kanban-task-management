@@ -23,7 +23,7 @@ export default function Home() {
           {board.columns.map((column) => (
             <Column key={board.name} column={column} />
           ))}
-					<div className="pt-[40px]">
+					<div className="py-[40px]">
 						<AddColumn />
 					</div>
         </main>

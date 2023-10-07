@@ -15,7 +15,7 @@ export default function Column({ column }: { column: Column }) {
           {column.name} ({column.tasks.length})
         </h2>
       </div>
-      <ul className="flex flex-col gap-5">
+      <ul className="flex flex-col gap-5 pb-10">
         {column.tasks.map((task) => (
           <Task key={task.title} task={task} />
         ))}

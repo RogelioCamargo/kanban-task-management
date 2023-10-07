@@ -32,12 +32,12 @@ body {
 }
 
 main {
-  height: calc(100% - 64px);
+  height: calc(100vh - 64px);
 }
 
 @media (min-width: 768px) {
   main {
-    height: calc(100% - 80px);
+    height: calc(100vh - 80px);
   }
 
   .grid-custom-columns {
@@ -179,10 +179,10 @@ select {
   position: absolute;
   top: 50%;
   left: 0;
-	transform: translateY(-50%);
+  transform: translateY(-50%);
   height: 16px;
   width: 16px;
-	border-radius: 2px;
+  border-radius: 2px;
 }
 
 /* On mouse-over, add a grey background color */
@@ -193,7 +193,7 @@ select {
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
   background-color: #635fc7;
-	border-color: #635fc7;
+  border-color: #635fc7;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
