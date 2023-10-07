@@ -8,7 +8,7 @@ export default function Home() {
 			<Aside />
 			<div className="w-full">
 				<Header />
-				<main className="p-3 text-center flex flex-col items-center justify-center gap-6 lg:gap-10 bg-gray-600">
+				<main className="p-3 text-center text-gray-300 flex flex-col items-center justify-center gap-6 lg:gap-8 bg-gray-100 dark:bg-gray-600">
 					<p className="text-lg font-bold">
 						This board is empty. Create a new column to get started.
 					</p>
