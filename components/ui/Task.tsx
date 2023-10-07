@@ -11,6 +11,10 @@ export default function Task({ task }: { task: Task }) {
     setOpenDetails(false);
   };
 
+  const numberTasksCompleted = task.subtasks.filter(
+    (subtask) => subtask.isCompleted
+  );
+
   return (
     <>
       <li
@@ -20,7 +24,7 @@ export default function Task({ task }: { task: Task }) {
       >
         <h3 className="mb-2">{task.title}</h3>
         <p className="text-sm text-gray-300">
-          0 of {task.subtasks.length} subtasks
+          {numberTasksCompleted.length} of {task.subtasks.length} subtasks
         </p>
       </li>
       {openDetails ? (
