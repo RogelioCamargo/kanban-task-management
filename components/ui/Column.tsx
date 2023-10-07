@@ -11,7 +11,7 @@ export default function Column({ column }: { column: Column }) {
           className="h-4 w-4 rounded-full"
           style={{ backgroundColor: `#${columnColor}` }}
         ></div>
-        <h2 className="text-xs uppercase tracking-[2.4px]">
+        <h2 className="text-xs uppercase font-bold tracking-[2.4px]">
           {column.name} ({column.tasks.length})
         </h2>
       </div>
