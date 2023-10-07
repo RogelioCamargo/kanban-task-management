@@ -4,10 +4,12 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggler() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme, ...other } = useTheme();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+	console.log(resolvedTheme, other);
 
   if (!mounted) {
     return null;
@@ -16,7 +18,6 @@ export default function ThemeToggler() {
   return (
     <div
       className="flex justify-center items-center gap-5 bg-gray-100 dark:bg-gray-600 py-3 rounded-md"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
       <svg width="19" height="19" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -25,7 +26,7 @@ export default function ThemeToggler() {
         />
       </svg>
       <label className="switch">
-        <input type="checkbox" />
+        <input type="checkbox" checked={resolvedTheme === "dark"} onChange={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} />
         <span className="slider round"></span>
       </label>
       <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
