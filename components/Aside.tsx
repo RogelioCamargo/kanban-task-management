@@ -3,7 +3,7 @@ import ThemeToggler from "./ui/ThemeToggler";
 
 export default function Aside() {
   return (
-    <aside className="hidden md:flex flex-col gap-12 py-8 bg-white dark:bg-gray-500 h-full w-[300px] border-r border-gray-200 dark:border-gray-400">
+    <aside className="hidden font-bold md:flex flex-col gap-12 py-8 bg-white dark:bg-gray-500 h-full w-[300px] border-r border-gray-200 dark:border-gray-400">
       <div className="pl-6 text-gray-500 dark:text-white">
         <svg width="153" height="26" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" fillRule="evenodd">

@@ -2,7 +2,7 @@ import Button from "./ui/Button";
 
 export default function Header() {
   return (
-    <header className="flex justify-between text-gray-500 px-4 py-7 bg-white dark:bg-gray-500 h-16 md:h-20 border-b border-gray-200 dark:border-gray-400">
+    <header className="flex justify-between text-gray-500 dark:text-white px-4 py-7 bg-white dark:bg-gray-500 h-16 md:h-20 border-b border-gray-200 dark:border-gray-400">
       <div className="flex items-center gap-4">
         <svg
           className="md:hidden"

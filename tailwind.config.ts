@@ -18,9 +18,9 @@ const config: Config = {
 				400: '#3E3F4E',
 				500: '#2B2C37',
 				600: '#20212C',
-				700: '000112'
 			},
-			'white': "#FFFFFF"
+			'white': "#FFF",
+			'black': "#000112"
 		},
     extend: {
       backgroundImage: {
