@@ -182,8 +182,6 @@ select {
 	transform: translateY(-50%);
   height: 16px;
   width: 16px;
-  background-color: #2B2C37;
-	border: 1px solid rgba(130, 143, 163, 0.25);
 	border-radius: 2px;
 }
 
@@ -195,6 +193,7 @@ select {
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
   background-color: #635fc7;
+	border-color: #635fc7;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -211,10 +210,10 @@ select {
 
 /* Style the checkmark/indicator */
 .container .checkmark::after {
-  left: 3.5px;
+  left: 3px;
   top: 50%;
-  width: 5px;
-  height: 10px;
+  width: 6px;
+  height: 9px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
