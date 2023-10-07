@@ -14,7 +14,7 @@ export default function Task({ task }: { task: Task }) {
   return (
     <>
       <li
-        className="w-[280px] px-4 md:px-6 py-6 bg-white dark:bg-gray-500 rounded-lg font-bold"
+        className="px-4 md:px-6 py-6 bg-white dark:bg-gray-500 rounded-lg font-bold"
         draggable
         onClick={() => setOpenDetails(true)}
       >

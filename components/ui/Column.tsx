@@ -5,7 +5,7 @@ export default function Column({ column }: { column: Column }) {
   const columnColor = Math.floor(Math.random() * 16777215).toString(16);
 
   return (
-    <div className="text-black dark:text-white">
+    <div className="text-black dark:text-white w-[280px]">
       <div className="flex gap-2 items-center mb-6">
         <div
           className="h-4 w-4 rounded-full"
