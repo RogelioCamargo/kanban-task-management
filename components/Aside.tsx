@@ -1,5 +1,5 @@
 import { boards } from "@/data";
-import ThemeToggler from "./ThemeToggler";
+import ThemeToggler from "./ui/ThemeToggler";
 
 export default function Aside() {
   return (
