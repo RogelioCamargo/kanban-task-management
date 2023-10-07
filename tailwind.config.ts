@@ -9,7 +9,10 @@ const config: Config = {
   ],
   theme: {
 		colors: {
-			'primary': '#635FC7',
+			'primary': {
+				DEFAULT:  '#635FC7',
+				hover: "#A8A4FF"
+			},
 			'secondary': '#FFFFFF',
 			'gray': {
 				100: '#F4F7FD',
