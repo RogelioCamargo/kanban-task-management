@@ -31,9 +31,6 @@ export const BoardDispatchContext = createContext<React.Dispatch<BoardActions>>(
 
 function ContextProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(boardReducer, initialState);
-	console.log(state);
-  // useEffect(() => {
-  // }, [state])
 
   return (
     <BoardContext.Provider value={state}>
