@@ -1,13 +1,13 @@
 "use client";
 
-import { Task } from "@/types";
+import { Task, TaskWithSubtasks } from "@/types";
 import SubTask from "./SubTask";
 
 export default function TaskDetails({
   task,
   closeDetails,
 }: {
-  task: Task;
+  task: TaskWithSubtasks;
   closeDetails: () => void;
 }) {
   const numberTasksCompleted = task.subtasks.filter(
@@ -22,7 +22,9 @@ export default function TaskDetails({
       />
       <div className="text-xs font-bold text-gray-300 dark:text-white bg-white dark:bg-gray-500 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[480px] mx-auto rounded-md flex flex-col gap-6 p-6">
         <div className="flex justify-between items-center gap-8">
-          <h3 className="text-lg font-bold text-black dark:text-white">{task.title}</h3>
+          <h3 className="text-lg font-bold text-black dark:text-white">
+            {task.title}
+          </h3>
           <svg width="7" height="22" xmlns="http://www.w3.org/2000/svg">
             <g fill="#828FA3" fillRule="evenodd">
               <circle cx="2.308" cy="2.308" r="2.308" />

@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
-import { boards as initalBoards } from "./data";
+import { boards, columns, tasks, subtasks } from "./data";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -11,16 +11,29 @@ export function Providers({ children }: { children: React.ReactNode }) {
   );
 }
 
-import { createContext, useEffect, useReducer } from "react";
-import { ActionType, Board, BoardActions } from "./types";
+import { createContext, useReducer } from "react";
+import {
+  ActionType,
+  Board,
+  BoardActions,
+  Column,
+  SubTask,
+  Task,
+} from "./types";
 
 type InitialStateType = {
   boards: Board[];
+  columns: Column[];
+  tasks: Task[];
+  subtasks: SubTask[];
   board: Board | null;
 };
 
 const initialState = {
-  boards: initalBoards,
+  boards,
+  columns,
+  tasks,
+  subtasks,
   board: null,
 };
 
@@ -55,36 +68,21 @@ function boardReducer(state: InitialStateType, action: BoardActions) {
         board: boardSelected,
       };
     case ActionType.MoveTask:
-      const { taskToMove, fromColumnId, toColumnId, boardId } = action.payload;
+      const { taskToMove, fromColumnId, toColumnId } = action.payload;
 
-      const newBoards = state.boards.slice().map((board) => {
-        if (board.id === boardId) {
+      const newTasks = state.tasks.map((task) => {
+        if (task.id == taskToMove.id) {
           return {
-            ...board,
-            columns: board.columns.slice().map((column) => {
-              if (column.id === fromColumnId) {
-                return {
-                  ...column,
-                  tasks: column.tasks
-                    .slice()
-                    .filter((task) => task.id !== taskToMove.id),
-                };
-              } else if (column.id === toColumnId) {
-                return {
-                  ...column,
-                  tasks: [...column.tasks, taskToMove], // Use spread operator to create a new tasks array
-                };
-              }
-              return { ...column };
-            }),
+            ...taskToMove,
+            columnId: toColumnId,
           };
         }
-        return { ...board };
+        return task;
       });
 
       return {
         ...state,
-        boards: newBoards,
+        tasks: newTasks,
       };
     default:
       return state;

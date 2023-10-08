@@ -1,10 +1,16 @@
 "use client";
 
-import { Column, Task } from "@/types";
+import { ColumnWithTasks, Task, TaskWithSubtasks } from "@/types";
 import { useState } from "react";
 import TaskDetails from "./TaskDetails";
 
-export default function Task({ task, column }: { task: Task; column: Column }) {
+export default function Task({
+  task,
+  column,
+}: {
+  task: TaskWithSubtasks;
+  column: ColumnWithTasks;
+}) {
   const [openDetails, setOpenDetails] = useState(false);
 
   const closeDetails = () => {

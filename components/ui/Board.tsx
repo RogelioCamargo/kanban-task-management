@@ -8,7 +8,13 @@ import { BoardContext, BoardDispatchContext } from "@/providers";
 import { ActionType } from "@/types";
 
 export default function Board() {
-  const { boards, board } = useContext(BoardContext);
+  const {
+    boards,
+    columns,
+    tasks,
+    subtasks,
+    board: selectedBoard,
+  } = useContext(BoardContext);
   const dispatch = useContext(BoardDispatchContext);
 
   useEffect(() => {
@@ -28,15 +34,34 @@ export default function Board() {
     );
   }
 
-  if (!board) {
+  if (!selectedBoard) {
     return (
       <main className="p-3 text-center text-gray-300 flex flex-col items-center justify-center gap-6 lg:gap-8 bg-gray-100 dark:bg-gray-600"></main>
     );
   }
 
-  const columns = board.columns;
+  const boardColumns = columns.filter(
+    (column) => column.boardId === selectedBoard.id
+  );
+  const columnsWithTasks = boardColumns.map((column) => {
+    const columnTasks = tasks.filter((task) => task.columnId === column.id);
+    const tasksWithSubtasks = columnTasks.map((task) => {
+      const taskSubtasks = subtasks.filter(
+        (subtask) => subtask.taskId === task.id
+      );
+      return {
+        ...task,
+        subtasks: taskSubtasks,
+      };
+    });
 
-  if (columns.length === 0) {
+    return {
+      ...column,
+      tasks: tasksWithSubtasks,
+    };
+  });
+
+  if (columnsWithTasks.length === 0) {
     return (
       <main className="p-3 text-center text-gray-300 flex flex-col items-center justify-center gap-6 lg:gap-8 bg-gray-100 dark:bg-gray-600">
         <p className="text-lg font-bold">
@@ -49,8 +74,8 @@ export default function Board() {
 
   return (
     <main className="bg-gray-100 dark:bg-gray-600 px-4 py-6 flex gap-6 overflow-scroll">
-      {board.columns.map((column) => (
-        <Column key={column.id} board={board} column={column} />
+      {columnsWithTasks.map((column) => (
+        <Column key={column.id} column={column} />
       ))}
       <div className="py-[40px]">
         <AddColumn />

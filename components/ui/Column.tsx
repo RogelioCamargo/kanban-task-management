@@ -1,14 +1,12 @@
-import { ActionType, Board, Column } from "@/types";
+import { ActionType, Board, Column, ColumnWithTasks } from "@/types";
 import Task from "./Task";
 import { useContext } from "react";
 import { BoardDispatchContext } from "@/providers";
 
 export default function Column({
   column,
-  board,
 }: {
-  column: Column;
-  board: Board;
+  column: ColumnWithTasks;
 }) {
   const columnColor = Math.floor(Math.random() * 16777215).toString(16);
   const dispath = useContext(BoardDispatchContext);
@@ -20,7 +18,6 @@ export default function Column({
       payload: {
         fromColumnId,
         toColumnId: column.id,
-        boardId: board.id,
         taskToMove,
       },
     });

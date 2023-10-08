@@ -2,6 +2,7 @@ export interface SubTask {
   id: number;
   title: string;
   isCompleted: boolean;
+  taskId: number;
 }
 
 export interface Task {
@@ -9,19 +10,32 @@ export interface Task {
   title: string;
   description?: string;
   status: string;
+  columnId: number;
+  order: number;
+}
+
+export interface TaskWithSubtasks extends Task {
   subtasks: SubTask[];
 }
 
 export interface Column {
   id: number;
   name: string;
-  tasks: Task[];
+  boardId: number;
+  order: number;
+}
+
+export interface ColumnWithTasks extends Column {
+  tasks: TaskWithSubtasks[];
 }
 
 export interface Board {
   id: number;
   name: string;
-  columns: Column[];
+}
+
+export interface BoardWithColumns extends Column {
+	columns: ColumnWithTasks[]
 }
 
 export enum ActionType {
@@ -46,7 +60,6 @@ export interface SelectBoard {
 export interface MoveTask {
   type: ActionType.MoveTask;
   payload: {
-    boardId: number;
     fromColumnId: number;
     toColumnId: number;
     taskToMove: Task;
