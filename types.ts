@@ -35,13 +35,14 @@ export interface Board {
 }
 
 export interface BoardWithColumns extends Column {
-	columns: ColumnWithTasks[]
+  columns: ColumnWithTasks[];
 }
 
 export enum ActionType {
   AddBoard,
   SelectBoard,
   MoveTask,
+  UpdateTask,
 }
 
 export interface AddBoard {
@@ -66,4 +67,9 @@ export interface MoveTask {
   };
 }
 
-export type BoardActions = AddBoard | SelectBoard | MoveTask;
+export interface UpdateTask {
+  type: ActionType.UpdateTask;
+  payload: Task;
+}
+
+export type BoardActions = AddBoard | SelectBoard | MoveTask | UpdateTask;

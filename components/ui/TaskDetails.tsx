@@ -1,7 +1,9 @@
 "use client";
 
-import { Task, TaskWithSubtasks } from "@/types";
+import { ActionType, Task, TaskWithSubtasks } from "@/types";
 import SubTask from "./SubTask";
+import { useContext } from "react";
+import { BoardDispatchContext } from "@/providers";
 
 export default function TaskDetails({
   task,
@@ -10,6 +12,7 @@ export default function TaskDetails({
   task: TaskWithSubtasks;
   closeDetails: () => void;
 }) {
+  const dispatch = useContext(BoardDispatchContext);
   const numberTasksCompleted = task.subtasks.filter(
     (subtask) => subtask.isCompleted
   );
@@ -52,7 +55,12 @@ export default function TaskDetails({
             <select
               className="px-4 py-2 font-normal"
               value={task.status}
-              onChange={() => console.log("selected")}
+              onChange={(e) =>
+                dispatch({
+                  type: ActionType.UpdateTask,
+                  payload: { ...task, status: e.target.value },
+                })
+              }
             >
               <option value="Todo">Todo</option>
               <option value="Doing">Doing</option>
