@@ -1,11 +1,11 @@
 export interface SubTask {
-	id: number,
+  id: number;
   title: string;
   isCompleted: boolean;
 }
 
 export interface Task {
-	id: number,
+  id: number;
   title: string;
   description?: string;
   status: string;
@@ -13,33 +13,44 @@ export interface Task {
 }
 
 export interface Column {
-	id: number,
+  id: number;
   name: string;
   tasks: Task[];
 }
 
 export interface Board {
-	id: number,
-	name: string,
+  id: number;
+  name: string;
   columns: Column[];
 }
 
 export enum ActionType {
-	AddBoard,
-	SelectBoard
+  AddBoard,
+  SelectBoard,
+  MoveTask,
 }
 
 export interface AddBoard {
-	type: ActionType.AddBoard,
-	payload: {
-		name: string,
-		columns: string[]
-	}
+  type: ActionType.AddBoard;
+  payload: {
+    name: string;
+    columns: string[];
+  };
 }
 
 export interface SelectBoard {
-	type: ActionType.SelectBoard,
-	payload: { id: number };
+  type: ActionType.SelectBoard;
+  payload: { id: number };
 }
 
-export type BoardActions = AddBoard | SelectBoard;
+export interface MoveTask {
+  type: ActionType.MoveTask;
+  payload: {
+    boardId: number;
+    fromColumnId: number;
+    toColumnId: number;
+    taskToMove: Task;
+  };
+}
+
+export type BoardActions = AddBoard | SelectBoard | MoveTask;

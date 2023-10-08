@@ -30,9 +30,7 @@ export default function Board() {
 
   if (!board) {
     return (
-      <main className="p-3 text-center text-gray-300 flex flex-col items-center justify-center gap-6 lg:gap-8 bg-gray-100 dark:bg-gray-600">
-
-      </main>
+      <main className="p-3 text-center text-gray-300 flex flex-col items-center justify-center gap-6 lg:gap-8 bg-gray-100 dark:bg-gray-600"></main>
     );
   }
 
@@ -52,7 +50,7 @@ export default function Board() {
   return (
     <main className="bg-gray-100 dark:bg-gray-600 px-4 py-6 flex gap-6 overflow-scroll">
       {board.columns.map((column) => (
-        <Column key={column.id} column={column} />
+        <Column key={column.id} board={board} column={column} />
       ))}
       <div className="py-[40px]">
         <AddColumn />
