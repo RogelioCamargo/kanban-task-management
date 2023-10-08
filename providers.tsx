@@ -71,7 +71,7 @@ function boardReducer(state: InitialStateType, action: BoardActions) {
       const { taskToMove, fromColumnId, toColumnId } = action.payload;
 
       var newTasks = state.tasks.map((task) => {
-        if (task.id == taskToMove.id) {
+        if (task.id === taskToMove.id) {
           return {
             ...taskToMove,
             columnId: toColumnId,
@@ -87,7 +87,7 @@ function boardReducer(state: InitialStateType, action: BoardActions) {
     case ActionType.UpdateTask:
       const { payload: taskToUpdate } = action;
       var newTasks = state.tasks.map((task) => {
-        if (task.id == taskToUpdate.id) {
+        if (task.id === taskToUpdate.id) {
           return taskToUpdate;
         }
         return task;
@@ -96,6 +96,25 @@ function boardReducer(state: InitialStateType, action: BoardActions) {
       return {
         ...state,
         tasks: newTasks,
+      };
+
+    case ActionType.ToggleSubTask:
+      const { payload: subtaskId } = action;
+
+      const newSubtasks = state.subtasks.map((subtask) => {
+        if (subtask.id === subtaskId) {
+          return {
+            ...subtask,
+            isCompleted: !subtask.isCompleted,
+          };
+        }
+
+        return subtask;
+      });
+
+      return {
+        ...state,
+        subtasks: newSubtasks,
       };
     default:
       return state;
