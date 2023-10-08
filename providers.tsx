@@ -12,7 +12,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 }
 
 import { createContext, useEffect, useReducer } from "react";
-import { Board, BoardActions } from "./types";
+import { ActionType, Board, BoardActions } from "./types";
 
 type InitialStateType = {
   boards: Board[];
@@ -31,6 +31,9 @@ export const BoardDispatchContext = createContext<React.Dispatch<BoardActions>>(
 
 function ContextProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(boardReducer, initialState);
+	console.log(state);
+  // useEffect(() => {
+  // }, [state])
 
   return (
     <BoardContext.Provider value={state}>
@@ -43,6 +46,16 @@ function ContextProvider({ children }: { children: React.ReactNode }) {
 
 function boardReducer(state: InitialStateType, action: BoardActions) {
   switch (action.type) {
+    case ActionType.SelectBoard:
+      const boardSelected = state.boards.find(
+        (board) => board.id == action.payload.id
+      );
+      if (!boardSelected) return state;
+
+      return {
+        ...state,
+        board: boardSelected,
+      };
     default:
       return state;
   }

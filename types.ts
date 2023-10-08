@@ -39,7 +39,7 @@ export interface AddBoard {
 
 export interface SelectBoard {
 	type: ActionType.SelectBoard,
-	payload: number;
+	payload: { id: number };
 }
 
 export type BoardActions = AddBoard | SelectBoard;

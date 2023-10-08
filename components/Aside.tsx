@@ -2,10 +2,12 @@
 
 import { useContext } from "react";
 import ThemeToggler from "./ui/ThemeToggler";
-import { BoardContext } from "@/providers";
+import { BoardContext, BoardDispatchContext } from "@/providers";
+import { ActionType } from "@/types";
 
 export default function Aside() {
-  const { boards } = useContext(BoardContext);
+  const { boards, board: selectedBoard } = useContext(BoardContext);
+  const dispatch = useContext(BoardDispatchContext);
 
   return (
     <aside className="hidden font-bold md:flex flex-col gap-12 py-8 bg-white dark:bg-gray-500 h-screen border-r border-gray-200 dark:border-gray-400">
@@ -31,14 +33,22 @@ export default function Aside() {
             All Boards ({boards.length})
           </h2>
           <ul className="pr-6">
-            {boards.map((board, index) => {
+            {boards.map((board) => {
               return (
                 <li
-                  key={board.name}
+                  key={board.id}
                   className={[
-                    "flex items-center py-4 gap-4 pl-6 rounded-r-full cursor-pointer hover:dark:bg-white hover:bg-primary hover:bg-opacity-10 hover:text-primary",
-                    index == 0 ? "bg-primary text-white" : "",
+                    "flex items-center py-4 gap-4 pl-6 rounded-r-full cursor-pointer",
+                    selectedBoard && selectedBoard.id === board.id
+                      ? "bg-primary text-white"
+                      : "hover:dark:bg-white hover:bg-primary hover:bg-opacity-10 hover:text-primary",
                   ].join(" ")}
+                  onClick={() =>
+                    dispatch({
+                      type: ActionType.SelectBoard,
+                      payload: { id: board.id },
+                    })
+                  }
                 >
                   <svg
                     width="16"

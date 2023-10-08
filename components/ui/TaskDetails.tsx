@@ -40,7 +40,7 @@ export default function TaskDetails({
           </h4>
           <ul className="flex flex-col gap-2">
             {task.subtasks.map((subtask) => (
-              <SubTask key={subtask.title} subtask={subtask} />
+              <SubTask key={subtask.id} subtask={subtask} />
             ))}
           </ul>
         </div>
