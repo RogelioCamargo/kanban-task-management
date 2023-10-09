@@ -1,4 +1,12 @@
-import { ActionType, BoardActions, InitialStateType, MoveTask, SelectBoard, ToggleSubTask, UpdateTask } from "./actions";
+import {
+  ActionType,
+  BoardActions,
+  InitialStateType,
+  MoveTask,
+  SelectBoard,
+  ToggleSubTask,
+  UpdateTaskStatus,
+} from "./actions";
 
 export function boardReducer(state: InitialStateType, action: BoardActions) {
   switch (action.type) {
@@ -8,8 +16,8 @@ export function boardReducer(state: InitialStateType, action: BoardActions) {
     case ActionType.MoveTask:
       return moveTask(state, action);
 
-    case ActionType.UpdateTask:
-      return updateTask(state, action);
+    case ActionType.UpdateTaskStatus:
+      return updateTaskStatus(state, action);
 
     case ActionType.ToggleSubTask:
       return toggleSubtask(state, action);
@@ -54,11 +62,21 @@ function moveTask(state: InitialStateType, action: MoveTask) {
   };
 }
 
-function updateTask(state: InitialStateType, action: UpdateTask) {
+function updateTaskStatus(state: InitialStateType, action: UpdateTaskStatus) {
   const { payload: taskToUpdate } = action;
+  const { board, columns: stateColumns } = state;
+  if (!board) return;
+
+  const columns = stateColumns.filter((column) => column.boardId === board.id);
+  const column = columns.find((column) => column.name === taskToUpdate.status);
+  if (!column) return;
+
   const newTasks = state.tasks.map((task) => {
     if (task.id === taskToUpdate.id) {
-      return taskToUpdate;
+      return {
+        ...taskToUpdate,
+        columnId: column.id,
+      };
     }
     return task;
   });

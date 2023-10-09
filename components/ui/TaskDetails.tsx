@@ -66,7 +66,7 @@ export default function TaskDetails({
               value={task.status}
               onChange={(e) =>
                 dispatch({
-                  type: ActionType.UpdateTask,
+                  type: ActionType.UpdateTaskStatus,
                   payload: { ...task, status: e.target.value },
                 })
               }
