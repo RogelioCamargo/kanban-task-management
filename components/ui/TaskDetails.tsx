@@ -4,7 +4,7 @@ import { Column, TaskWithSubtasks } from "@/types";
 import { useContext } from "react";
 import { BoardContext, BoardDispatchContext } from "@/providers";
 import { ActionType } from "@/store/actions";
-import SubTask from "./Subtask";
+import SubTask from "./SubTask";
 
 export default function TaskDetails({
   task,
