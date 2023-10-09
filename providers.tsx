@@ -72,45 +72,6 @@ function boardReducer(state: InitialStateType, action: BoardActions) {
     case ActionType.ToggleSubTask:
       return toggleSubtask(state, action);
 
-    case ActionType.CreateTask:
-			return state;
-			// const { title, description, status, boardId, subtasks } = action.payload;
-			// const columns = state.columns.filter(column => column.boardId === boardId);
-			// columns.sort((a, b) => a.order - b.order);
-
-      // const tasksSortedByOrder = state.tasks.sort((a, b) => b.order - a.order);
-
-      // const id = Math.floor(Math.random() * 1000000000);
-      // const order =
-      //   tasksSortedByOrder.length > 0 ? tasksSortedByOrder[0].order + 1 : 1;
-
-
-      // const newTask = {
-      //   id,
-      //   order,
-      //   title,
-      //   description,
-      //   status,
-      //   columnId: columns[0].id,
-      // };
-
-      // const newlyCreatedSubtasks = subtasks.map((subtaskDiscription) => ({
-      //   id: Math.floor(Math.random() * 1000000000),
-      //   title: subtaskDiscription,
-      //   isCompleted: false,
-      //   taskId: id,
-      // }));
-
-      // const newTasks = [...state.tasks, newTask];
-      // console.log("newTasks", newTasks);
-      // const newSubtasks = [...state.subtasks, ...newlyCreatedSubtasks];
-      // console.log("newTasks", newSubtasks);
-
-      // return {
-      //   ...state,
-      //   tasks: newTasks,
-      //   subtasks: newSubtasks,
-      // };
     default:
       return state;
   }
@@ -130,12 +91,16 @@ function selectBoard(state: InitialStateType, action: SelectBoard) {
 
 function moveTask(state: InitialStateType, action: MoveTask) {
   const { taskToMove, fromColumnId, toColumnId } = action.payload;
+  const column = state.columns.find((column) => column.id === toColumnId);
+
+  if (!column) return state;
 
   const newTaskss = state.tasks.map((task) => {
     if (task.id === taskToMove.id) {
       return {
         ...taskToMove,
         columnId: toColumnId,
+        status: column.name,
       };
     }
     return task;
