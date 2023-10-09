@@ -121,7 +121,7 @@ select {
   width: 100%;
   cursor: inherit;
   line-height: inherit;
-  outline: none;
+  outline: #635fc7;
 }
 
 select::-ms-expand {

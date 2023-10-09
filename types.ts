@@ -44,6 +44,7 @@ export enum ActionType {
   MoveTask,
   UpdateTask,
   ToggleSubTask,
+  CreateTask,
 }
 
 export interface AddBoard {
@@ -78,9 +79,21 @@ export interface ToggleSubTask {
   payload: number;
 }
 
+export interface CreateTask {
+  type: ActionType.CreateTask;
+  payload: {
+    title: string;
+    description: string;
+    status: string;
+    boardId: number;
+    tasks?: string[];
+  };
+}
+
 export type BoardActions =
   | AddBoard
   | SelectBoard
   | MoveTask
   | UpdateTask
-  | ToggleSubTask;
+  | ToggleSubTask
+  | CreateTask;

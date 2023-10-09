@@ -1,11 +1,17 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Button from "./ui/Button";
 import { BoardContext } from "@/providers";
+import AddTaskForm from "./AddTaskForm";
 
 export default function Header() {
   const { board } = useContext(BoardContext);
+  const [openAddTaskForm, setOpenAddTaskForm] = useState(false);
+
+  const closeForm = () => {
+    setOpenAddTaskForm(false);
+  };
 
   return (
     <header className="flex justify-between text-gray-500 dark:text-white px-4 py-7 bg-white dark:bg-gray-500 h-16 md:h-20 border-b border-gray-200 dark:border-gray-400">
@@ -40,7 +46,7 @@ export default function Header() {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <Button>
+        <Button onClick={() => setOpenAddTaskForm(true)}>
           <svg
             className="md:hidden"
             width="12"
@@ -62,6 +68,7 @@ export default function Header() {
           </g>
         </svg>
       </div>
+      {openAddTaskForm ? <AddTaskForm closeForm={closeForm} /> : null}
     </header>
   );
 }
