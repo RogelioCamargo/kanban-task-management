@@ -25,8 +25,8 @@ export default function CreateBoardForm({
         onClick={closeForm}
       />
       <div className="text-xs font-bold bg-white dark:bg-gray-500 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[480px] mx-auto rounded-md flex flex-col gap-6 p-6">
-        <h4 className="text-lg">Add New Board</h4>
-        <label>
+        <h4 className="text-lg text-black dark:text-white">Add New Board</h4>
+        <label className="text-gray-300">
           Name
           <Input
             name="title"
@@ -35,7 +35,7 @@ export default function CreateBoardForm({
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-        <label>
+        <label className="text-gray-300">
           Columns
           <div className="mt-2 flex flex-col gap-3">
             {columns.map((columnText, index) => (

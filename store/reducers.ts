@@ -65,11 +65,11 @@ function moveTask(state: InitialStateType, action: MoveTask) {
 function updateTaskStatus(state: InitialStateType, action: UpdateTaskStatus) {
   const { payload: taskToUpdate } = action;
   const { board, columns: stateColumns } = state;
-  if (!board) return;
+  if (!board) return state;
 
   const columns = stateColumns.filter((column) => column.boardId === board.id);
   const column = columns.find((column) => column.name === taskToUpdate.status);
-  if (!column) return;
+  if (!column) return state;
 
   const newTasks = state.tasks.map((task) => {
     if (task.id === taskToUpdate.id) {
