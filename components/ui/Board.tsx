@@ -5,7 +5,7 @@ import Column from "./Column";
 import Button from "./Button";
 import { useContext, useEffect } from "react";
 import { BoardContext, BoardDispatchContext } from "@/providers";
-import { ActionType } from "@/types";
+import { ActionType } from "@/store/actions";
 
 export default function Board() {
   const {

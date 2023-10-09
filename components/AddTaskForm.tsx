@@ -1,10 +1,10 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { BoardDispatchContext } from "@/providers";
+import { BoardContext } from "@/providers";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import { ActionType, Board } from "@/types";
+import { Board, Column } from "@/types";
 
 export default function AddTaskForm({
   board,
@@ -20,7 +20,14 @@ export default function AddTaskForm({
   });
   const [subtasks, setSubtasks] = useState([""]);
   const [errors, setErrors] = useState<string[]>([]);
-  const dispatch = useContext(BoardDispatchContext);
+  const { columns: stateColumns } = useContext(BoardContext);
+
+  let columns: Column[] = [];
+  if (board) {
+    columns = stateColumns
+      .filter((column) => column.boardId === board.id)
+      .sort((a, b) => a.order - b.order);
+  }
 
   const handleSubmit = () => {
     setErrors([]);
@@ -37,14 +44,7 @@ export default function AddTaskForm({
       ]);
     }
 
-    dispatch({
-      type: ActionType.CreateTask,
-      payload: {
-        ...task,
-        boardId: board.id,
-        subtasks,
-      },
-    });
+    alert("Feature Not Implemented Yet");
 
     closeForm();
   };

@@ -1,7 +1,8 @@
-import { ActionType, Board, Column, ColumnWithTasks } from "@/types";
+import { Column, ColumnWithTasks } from "@/types";
 import Task from "./Task";
 import { useContext } from "react";
 import { BoardDispatchContext } from "@/providers";
+import { ActionType } from "@/store/actions";
 
 export default function Column({
   column,

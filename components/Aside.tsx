@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import ThemeToggler from "./ui/ThemeToggler";
 import { BoardContext, BoardDispatchContext } from "@/providers";
-import { ActionType } from "@/types";
+import { ActionType } from "@/store/actions";
 
 export default function Aside() {
   const { boards, board: selectedBoard } = useContext(BoardContext);

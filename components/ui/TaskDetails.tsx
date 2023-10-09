@@ -1,9 +1,10 @@
 "use client";
 
-import { ActionType, Column, Task, TaskWithSubtasks } from "@/types";
+import { Column, TaskWithSubtasks } from "@/types";
 import { useContext } from "react";
 import { BoardContext, BoardDispatchContext } from "@/providers";
-import Subtask from "./SubTask";
+import Subtask from "./Subtask";
+import { ActionType } from "@/store/actions";
 
 export default function TaskDetails({
   task,
@@ -24,8 +25,6 @@ export default function TaskDetails({
       .filter((column) => column.boardId === board.id)
       .sort((a, b) => a.order - b.order);
   }
-
-  console.log(columns);
 
   return (
     <>
