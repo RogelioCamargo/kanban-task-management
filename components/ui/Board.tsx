@@ -77,9 +77,9 @@ export default function Board() {
       {columnsWithTasks.map((column) => (
         <Column key={column.id} column={column} />
       ))}
-      {/* <div className="py-[40px]">
+      <div className="py-[40px]">
         <AddColumn />
-      </div> */}
+      </div>
     </main>
   );
 }

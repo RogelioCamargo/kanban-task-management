@@ -45,7 +45,7 @@ export default function Header() {
           </svg>
         </div>
       </div>
-      {/* <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4">
         <Button onClick={() => setOpenAddTaskForm(true)}>
           <svg
             className="md:hidden"
@@ -67,7 +67,7 @@ export default function Header() {
             <circle cx="2.308" cy="17.692" r="2.308" />
           </g>
         </svg>
-      </div> */}
+      </div>
       {openAddTaskForm && board ? (
         <AddTaskForm board={board} closeForm={closeForm} />
       ) : null}

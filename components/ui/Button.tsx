@@ -8,24 +8,13 @@ export default function Button({
   className,
   ...props
 }: ButtonProps) {
-  if (variant === "secondary") {
-    return (
-      <button
-        className={[
-          "bg-primary bg-opacity-10 dark:bg-white text-[13px] font-bold text-primary py-2.5 px-5 rounded-full",
-          className,
-        ].join(" ")}
-        {...props}
-      >
-        {children}
-      </button>
-    );
-  }
-
   return (
     <button
       className={[
-        "bg-primary hover:bg-primary-hover text-[13px] font-bold text-white py-2.5 px-5 rounded-full",
+        "text-[13px] font-bold py-2.5 px-5 rounded-full",
+        variant === "secondary"
+          ? "bg-primary bg-opacity-10 dark:bg-white text-primary"
+          : "bg-primary hover:bg-primary-hover text-white",
         className,
       ].join(" ")}
       {...props}
