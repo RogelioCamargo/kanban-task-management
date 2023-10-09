@@ -4,7 +4,7 @@ import { Column, TaskWithSubtasks } from "@/types";
 import { useContext } from "react";
 import { BoardContext, BoardDispatchContext } from "@/providers";
 import { ActionType } from "@/store/actions";
-import Subtask from "./Subtask";
+import SubTask from "./Subtask";
 
 export default function TaskDetails({
   task,
@@ -54,7 +54,7 @@ export default function TaskDetails({
           </h4>
           <ul className="flex flex-col gap-2">
             {task.subtasks.map((subtask) => (
-              <Subtask key={subtask.id} subtask={subtask} />
+              <SubTask key={subtask.id} subtask={subtask} />
             ))}
           </ul>
         </div>

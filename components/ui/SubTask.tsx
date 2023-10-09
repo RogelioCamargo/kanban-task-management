@@ -5,7 +5,7 @@ import { ActionType } from "@/store/actions";
 import { SubTask } from "@/types";
 import { useContext } from "react";
 
-export default function Subtask({ subtask }: { subtask: SubTask }) {
+export default function SubTask({ subtask }: { subtask: SubTask }) {
   const dispatch = useContext(BoardDispatchContext);
   return (
     <li className="bg-gray-100 dark:bg-gray-600 rounded">
