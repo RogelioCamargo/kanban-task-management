@@ -4,15 +4,50 @@ import { useContext, useState } from "react";
 import { BoardDispatchContext } from "@/providers";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
+import { ActionType, Board } from "@/types";
 
-export default function AddTaskForm({ closeForm }: { closeForm: () => void }) {
+export default function AddTaskForm({
+  board,
+  closeForm,
+}: {
+  board: Board;
+  closeForm: () => void;
+}) {
   const [task, setTask] = useState({
     title: "",
     description: "",
     status: "Todo",
   });
   const [subtasks, setSubtasks] = useState([""]);
+  const [errors, setErrors] = useState<string[]>([]);
   const dispatch = useContext(BoardDispatchContext);
+
+  const handleSubmit = () => {
+    setErrors([]);
+    if (task.title.length === 0) {
+      setErrors((previousErrors) => [
+        ...previousErrors,
+        "Title can't be empty.",
+      ]);
+    }
+    if (subtasks.some((subtask) => subtask.length === 0)) {
+      setErrors((previousErrors) => [
+        ...previousErrors,
+        "Subtask can't be empty.",
+      ]);
+    }
+
+    dispatch({
+      type: ActionType.CreateTask,
+      payload: {
+        ...task,
+        boardId: board.id,
+        subtasks,
+      },
+    });
+
+    closeForm();
+  };
 
   return (
     <>
@@ -20,12 +55,25 @@ export default function AddTaskForm({ closeForm }: { closeForm: () => void }) {
         className="h-screen w-screen absolute top-0 left-0 bg-black bg-opacity-50 z-0"
         onClick={closeForm}
       />
-      <form className="text-xs font-bold bg-white dark:bg-gray-500 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[480px] mx-auto rounded-md flex flex-col gap-6 p-6">
+      <div className="text-xs font-bold bg-white dark:bg-gray-500 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[480px] mx-auto rounded-md flex flex-col gap-6 p-6">
         <h4 className="text-lg">Add New Task</h4>
+        <ul
+          className={[
+            "flex flex-col gap-1 -my-1",
+            errors.length === 0 ? "hidden" : "",
+          ].join(" ")}
+        >
+          {errors.map((error) => (
+            <li key={error} className="text-red">
+              {error}
+            </li>
+          ))}
+        </ul>
         <label>
           Title
           <Input
             type="text"
+            name="title"
             value={task.title}
             placeholder="e.g. Take a coffee break"
             onChange={(e) =>
@@ -40,6 +88,7 @@ export default function AddTaskForm({ closeForm }: { closeForm: () => void }) {
           Description
           <textarea
             value={task.description}
+            name="description"
             placeholder="e.g. It’s always good to take a break. This 15 minute break will "
             className="block w-full py-2 px-4 rounded-md dark:bg-gray-500 border dark:border-gray-400 mt-2 placeholder-gray-300"
             onChange={(e) =>
@@ -109,7 +158,6 @@ export default function AddTaskForm({ closeForm }: { closeForm: () => void }) {
         <Button
           variant="secondary"
           onClick={(e) => {
-            e.preventDefault();
             setSubtasks((previousState) => [...previousState, ""]);
           }}
         >
@@ -135,8 +183,8 @@ export default function AddTaskForm({ closeForm }: { closeForm: () => void }) {
             </select>
           </div>
         </label>
-        <Button>Create Task</Button>
-      </form>
+        <Button onClick={handleSubmit}>Create Task</Button>
+      </div>
     </>
   );
 }

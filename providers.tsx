@@ -17,8 +17,12 @@ import {
   Board,
   BoardActions,
   Column,
+  MoveTask,
+  SelectBoard,
   SubTask,
   Task,
+  ToggleSubTask,
+  UpdateTask,
 } from "./types";
 
 type InitialStateType = {
@@ -44,7 +48,6 @@ export const BoardDispatchContext = createContext<React.Dispatch<BoardActions>>(
 
 function ContextProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(boardReducer, initialState);
-  console.log(state);
 
   return (
     <BoardContext.Provider value={state}>
@@ -58,65 +61,123 @@ function ContextProvider({ children }: { children: React.ReactNode }) {
 function boardReducer(state: InitialStateType, action: BoardActions) {
   switch (action.type) {
     case ActionType.SelectBoard:
-      const boardSelected = state.boards.find(
-        (board) => board.id === action.payload.id
-      );
-      if (!boardSelected) return state;
+      return selectBoard(state, action);
 
-      return {
-        ...state,
-        board: boardSelected,
-      };
     case ActionType.MoveTask:
-      const { taskToMove, fromColumnId, toColumnId } = action.payload;
+      return moveTask(state, action);
 
-      var newTasks = state.tasks.map((task) => {
-        if (task.id === taskToMove.id) {
-          return {
-            ...taskToMove,
-            columnId: toColumnId,
-          };
-        }
-        return task;
-      });
-
-      return {
-        ...state,
-        tasks: newTasks,
-      };
     case ActionType.UpdateTask:
-      const { payload: taskToUpdate } = action;
-      var newTasks = state.tasks.map((task) => {
-        if (task.id === taskToUpdate.id) {
-          return taskToUpdate;
-        }
-        return task;
-      });
-
-      return {
-        ...state,
-        tasks: newTasks,
-      };
+      return updateTask(state, action);
 
     case ActionType.ToggleSubTask:
-      const { payload: subtaskId } = action;
+      return toggleSubtask(state, action);
 
-      const newSubtasks = state.subtasks.map((subtask) => {
-        if (subtask.id === subtaskId) {
-          return {
-            ...subtask,
-            isCompleted: !subtask.isCompleted,
-          };
-        }
+    case ActionType.CreateTask:
+			return state;
+			// const { title, description, status, boardId, subtasks } = action.payload;
+			// const columns = state.columns.filter(column => column.boardId === boardId);
+			// columns.sort((a, b) => a.order - b.order);
 
-        return subtask;
-      });
+      // const tasksSortedByOrder = state.tasks.sort((a, b) => b.order - a.order);
 
-      return {
-        ...state,
-        subtasks: newSubtasks,
-      };
+      // const id = Math.floor(Math.random() * 1000000000);
+      // const order =
+      //   tasksSortedByOrder.length > 0 ? tasksSortedByOrder[0].order + 1 : 1;
+
+
+      // const newTask = {
+      //   id,
+      //   order,
+      //   title,
+      //   description,
+      //   status,
+      //   columnId: columns[0].id,
+      // };
+
+      // const newlyCreatedSubtasks = subtasks.map((subtaskDiscription) => ({
+      //   id: Math.floor(Math.random() * 1000000000),
+      //   title: subtaskDiscription,
+      //   isCompleted: false,
+      //   taskId: id,
+      // }));
+
+      // const newTasks = [...state.tasks, newTask];
+      // console.log("newTasks", newTasks);
+      // const newSubtasks = [...state.subtasks, ...newlyCreatedSubtasks];
+      // console.log("newTasks", newSubtasks);
+
+      // return {
+      //   ...state,
+      //   tasks: newTasks,
+      //   subtasks: newSubtasks,
+      // };
     default:
       return state;
   }
+}
+
+function selectBoard(state: InitialStateType, action: SelectBoard) {
+  const boardSelected = state.boards.find(
+    (board) => board.id === action.payload.id
+  );
+  if (!boardSelected) return state;
+
+  return {
+    ...state,
+    board: boardSelected,
+  };
+}
+
+function moveTask(state: InitialStateType, action: MoveTask) {
+  const { taskToMove, fromColumnId, toColumnId } = action.payload;
+
+  const newTaskss = state.tasks.map((task) => {
+    if (task.id === taskToMove.id) {
+      return {
+        ...taskToMove,
+        columnId: toColumnId,
+      };
+    }
+    return task;
+  });
+
+  return {
+    ...state,
+    tasks: newTaskss,
+  };
+}
+
+function updateTask(state: InitialStateType, action: UpdateTask) {
+  const { payload: taskToUpdate } = action;
+  const newTasks = state.tasks.map((task) => {
+    if (task.id === taskToUpdate.id) {
+      return taskToUpdate;
+    }
+    return task;
+  });
+
+  return {
+    ...state,
+    tasks: newTasks,
+  };
+}
+
+function toggleSubtask(state: InitialStateType, action: ToggleSubTask) {
+  const { payload: subtaskId } = action;
+
+  const newSubtasks = state.subtasks.map((subtask) => {
+    if (subtask.id === subtaskId) {
+      return {
+        ...subtask,
+        isCompleted: !subtask.isCompleted,
+      };
+    }
+
+    return subtask;
+  });
+
+  return {
+    ...state,
+    subtasks: newSubtasks,
+  };
 }

@@ -86,7 +86,7 @@ export interface CreateTask {
     description: string;
     status: string;
     boardId: number;
-    tasks?: string[];
+    subtasks: string[];
   };
 }
 
