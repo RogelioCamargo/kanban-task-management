@@ -122,6 +122,7 @@ select {
   cursor: inherit;
   line-height: inherit;
   outline: #635fc7;
+	border-radius: 4px;
 }
 
 select::-ms-expand {
@@ -178,7 +179,7 @@ select {
 .checkmark {
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 12px;
   transform: translateY(-50%);
   height: 16px;
   width: 16px;

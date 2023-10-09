@@ -4,14 +4,15 @@ import { BoardDispatchContext } from "@/providers";
 import { ActionType, SubTask } from "@/types";
 import { useContext } from "react";
 
-export default function SubTask({ subtask }: { subtask: SubTask }) {
+export default function Subtask({ subtask }: { subtask: SubTask }) {
   const dispatch = useContext(BoardDispatchContext);
 
   return (
-    <li className="bg-gray-100 dark:bg-gray-600 px-3 py-4">
-      <label className="container flex items-center gap-4">
+    <li className="bg-gray-100 dark:bg-gray-600 rounded">
+      <label className="container flex items-center gap-4 px-3 py-4">
         <span
           className={[
+						"ml-2",
             subtask.isCompleted
               ? "line-through text-gray-300"
               : "text-black dark:text-white",

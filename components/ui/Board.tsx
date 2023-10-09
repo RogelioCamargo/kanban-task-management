@@ -74,9 +74,11 @@ export default function Board() {
 
   return (
     <main className="bg-gray-100 dark:bg-gray-600 px-4 py-6 flex gap-6 overflow-scroll">
-      {columnsWithTasks.map((column) => (
-        <Column key={column.id} column={column} />
-      ))}
+      {columnsWithTasks
+        .sort((a, b) => a.order - b.order)
+        .map((column) => (
+          <Column key={column.id} column={column} />
+        ))}
       <div className="py-[40px]">
         <AddColumn />
       </div>

@@ -1,9 +1,9 @@
 "use client";
 
-import { ActionType, Task, TaskWithSubtasks } from "@/types";
-import SubTask from "./SubTask";
+import { ActionType, Column, Task, TaskWithSubtasks } from "@/types";
 import { useContext } from "react";
-import { BoardDispatchContext } from "@/providers";
+import { BoardContext, BoardDispatchContext } from "@/providers";
+import Subtask from "./SubTask";
 
 export default function TaskDetails({
   task,
@@ -16,6 +16,16 @@ export default function TaskDetails({
   const numberTasksCompleted = task.subtasks.filter(
     (subtask) => subtask.isCompleted
   );
+  const { board, columns: stateColumns } = useContext(BoardContext);
+
+  let columns: Column[] = [];
+  if (board) {
+    columns = stateColumns
+      .filter((column) => column.boardId === board.id)
+      .sort((a, b) => a.order - b.order);
+  }
+
+  console.log(columns);
 
   return (
     <>
@@ -45,7 +55,7 @@ export default function TaskDetails({
           </h4>
           <ul className="flex flex-col gap-2">
             {task.subtasks.map((subtask) => (
-              <SubTask key={subtask.id} subtask={subtask} />
+              <Subtask key={subtask.id} subtask={subtask} />
             ))}
           </ul>
         </div>
@@ -62,9 +72,11 @@ export default function TaskDetails({
                 })
               }
             >
-              <option value="Todo">Todo</option>
-              <option value="Doing">Doing</option>
-              <option value="Done">Done</option>
+              {columns.map((column) => (
+                <option key={column.id} value={column.name}>
+                  {column.name}
+                </option>
+              ))}
             </select>
           </div>
         </label>
