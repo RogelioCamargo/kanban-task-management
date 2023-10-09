@@ -19,9 +19,10 @@ export default function Board() {
 
   useEffect(() => {
     if (boards.length > 0) {
+			console.log("hello");
       dispatch({ type: ActionType.SelectBoard, payload: { id: boards[0].id } });
     }
-  }, []);
+  }, [dispatch, boards]);
 
   if (boards.length === 0) {
     return (
