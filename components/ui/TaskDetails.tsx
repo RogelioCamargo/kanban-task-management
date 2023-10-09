@@ -3,8 +3,8 @@
 import { Column, TaskWithSubtasks } from "@/types";
 import { useContext } from "react";
 import { BoardContext, BoardDispatchContext } from "@/providers";
-import Subtask from "./Subtask";
 import { ActionType } from "@/store/actions";
+import Subtask from "./Subtask";
 
 export default function TaskDetails({
   task,
