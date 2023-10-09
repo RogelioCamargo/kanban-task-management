@@ -1,7 +1,8 @@
 "use client";
 
 import { BoardDispatchContext } from "@/providers";
-import { ActionType, SubTask } from "@/types";
+import { ActionType } from "@/store/actions";
+import { SubTask } from "@/types";
 import { useContext } from "react";
 
 export default function Subtask({ subtask }: { subtask: SubTask }) {
