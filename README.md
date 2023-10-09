@@ -1,8 +1,9 @@
 # Kanban Task Management System
 
-This task management app is designed to help you stay organized and manage your tasks effectively. Whether you're working on personal projects or collaborating with a team, this app has you covered. It features a sleek and responsive design, drag-and-drop functionality, theme toggling, and more.
+This task management app is designed to help you stay organized and manage your tasks effectively. It features a sleek and responsive design, drag-and-drop functionality, theme toggling, and more to come.
 
 🚧 Need to implement backend. 🚧
+<br>
 Currently using useReducer and React context to manage state throught the app.
 
 ## Features
