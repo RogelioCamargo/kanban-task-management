@@ -16,10 +16,9 @@ export default function AddTaskForm({
   const [task, setTask] = useState({
     title: "",
     description: "",
-    status: "Todo",
+    status: "",
   });
   const [subtasks, setSubtasks] = useState([""]);
-  const [errors, setErrors] = useState<string[]>([]);
   const { columns: stateColumns } = useContext(BoardContext);
 
   let columns: Column[] = [];
@@ -30,20 +29,6 @@ export default function AddTaskForm({
   }
 
   const handleSubmit = () => {
-    setErrors([]);
-    if (task.title.length === 0) {
-      setErrors((previousErrors) => [
-        ...previousErrors,
-        "Title can't be empty.",
-      ]);
-    }
-    if (subtasks.some((subtask) => subtask.length === 0)) {
-      setErrors((previousErrors) => [
-        ...previousErrors,
-        "Subtask can't be empty.",
-      ]);
-    }
-
     alert("Feature Not Implemented Yet");
 
     closeForm();
@@ -57,22 +42,9 @@ export default function AddTaskForm({
       />
       <div className="text-xs font-bold bg-white dark:bg-gray-500 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[480px] mx-auto rounded-md flex flex-col gap-6 p-6">
         <h4 className="text-lg">Add New Task</h4>
-        <ul
-          className={[
-            "flex flex-col gap-1 -my-1",
-            errors.length === 0 ? "hidden" : "",
-          ].join(" ")}
-        >
-          {errors.map((error) => (
-            <li key={error} className="text-red">
-              {error}
-            </li>
-          ))}
-        </ul>
         <label>
           Title
           <Input
-            type="text"
             name="title"
             value={task.title}
             placeholder="e.g. Take a coffee break"
@@ -105,7 +77,6 @@ export default function AddTaskForm({
             {subtasks.map((subtaskText, index) => (
               <div key={index} className="flex gap-4 items-center">
                 <Input
-                  type="text"
                   value={subtaskText}
                   placeholder="e.g. Make coffee"
                   onChange={(e) =>
@@ -177,9 +148,11 @@ export default function AddTaskForm({
                 }))
               }
             >
-              <option value="Todo">Todo</option>
-              <option value="Doing">Doing</option>
-              <option value="Done">Done</option>
+              {columns.map((column) => (
+                <option key={column.id} value={column.name}>
+                  {column.name}
+                </option>
+              ))}
             </select>
           </div>
         </label>
