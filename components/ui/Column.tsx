@@ -1,38 +1,69 @@
 import { Column, ColumnWithTasks } from "@/types";
 import Task from "./Task";
 import { useContext } from "react";
-import { BoardDispatchContext } from "@/providers";
+import { BoardContext, BoardDispatchContext } from "@/providers";
 import { ActionType } from "@/store/actions";
+import { findAfterElement } from "@/utils";
 
-export default function Column({
-  column,
-}: {
-  column: ColumnWithTasks;
-}) {
+export default function Column({ column }: { column: ColumnWithTasks }) {
   const columnColor = Math.floor(Math.random() * 16777215).toString(16);
-  const dispath = useContext(BoardDispatchContext);
+  const dispatch = useContext(BoardDispatchContext);
+  const { taskIdBeingDragged } = useContext(BoardContext);
 
-  const handleOnDrop = (e: React.DragEvent) => {
-    const { taskToMove, fromColumnId } = JSON.parse(e.dataTransfer.getData("task"));
-    dispath({
+  const columnsTaskSortedInOrder = column.tasks.sort(
+    (a, b) => a.order - b.order
+  );
+
+  const handleOnDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+
+    if (!taskIdBeingDragged) return;
+
+    const columnContainer = e.currentTarget;
+    const afterElement = findAfterElement(columnContainer, e.clientY);
+
+    const taskIdsOrder = columnsTaskSortedInOrder.map((task) => task.id);
+    const draggingTaskIndex = taskIdsOrder.indexOf(taskIdBeingDragged);
+
+    // Remove the dragged task from its original position
+    taskIdsOrder.splice(draggingTaskIndex, 1);
+
+    if (afterElement) {
+      const afterTaskId = Number((afterElement as HTMLElement).dataset.taskId);
+      // If the afterElement is the currently dragged item, we don't want to do anything.
+      // Otherwise, there will be a lot of flickering and functionality will not work as expected.
+      if (afterTaskId === taskIdBeingDragged) return;
+
+      const afterTaskIndex = taskIdsOrder.indexOf(afterTaskId);
+
+      // Insert the dragged task after the target task
+      taskIdsOrder.splice(afterTaskIndex, 0, taskIdBeingDragged);
+    } else {
+      // If no target element, append the task to the end
+      taskIdsOrder.push(taskIdBeingDragged);
+    }
+
+    dispatch({
       type: ActionType.MoveTask,
       payload: {
-        fromColumnId,
         toColumnId: column.id,
-        taskToMove,
+        taskIdsInOrder: taskIdsOrder,
       },
     });
   };
 
-  const handleOnDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
+  const handleOnDrop = (e: React.DragEvent) => {
+    dispatch({
+      type: ActionType.SetTaskBeingDragged,
+      payload: null,
+    });
   };
 
   return (
     <div
       className="text-black dark:text-white w-[280px] min-w-[280px]"
-      onDrop={handleOnDrop}
       onDragOver={handleOnDragOver}
+      onDrop={handleOnDrop}
     >
       <div className="flex gap-2 items-center mb-6">
         <div
@@ -44,7 +75,7 @@ export default function Column({
         </h2>
       </div>
       <ul className="flex flex-col gap-5 pb-10">
-        {column.tasks.map((task) => (
+        {columnsTaskSortedInOrder.map((task) => (
           <Task key={task.id} column={column} task={task} />
         ))}
       </ul>

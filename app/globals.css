@@ -122,7 +122,7 @@ select {
   cursor: inherit;
   line-height: inherit;
   outline: #635fc7;
-	border-radius: 4px;
+  border-radius: 4px;
 }
 
 select::-ms-expand {
@@ -186,7 +186,7 @@ select {
   border-radius: 2px;
 }
 
-/* When the checkbox is checked, add a blue background */
+/* When the checkbox is checked, add a primary color background */
 .container input:checked ~ .checkmark {
   background-color: #635fc7;
   border-color: #635fc7;
@@ -215,4 +215,10 @@ select {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg) translate(-50%, -50%);
+}
+
+/* Drag & Drop */
+
+.dragging {
+  opacity: 0.1;
 }

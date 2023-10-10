@@ -1,9 +1,11 @@
+import { Task } from "@/types";
 import {
   ActionType,
   BoardActions,
   InitialStateType,
   MoveTask,
   SelectBoard,
+  SetTaskBeingDragged,
   ToggleSubTask,
   UpdateTaskStatus,
 } from "./actions";
@@ -21,6 +23,9 @@ export function boardReducer(state: InitialStateType, action: BoardActions) {
 
     case ActionType.ToggleSubTask:
       return toggleSubtask(state, action);
+
+    case ActionType.SetTaskBeingDragged:
+      return setTaskBeingDragged(state, action);
 
     default:
       return state;
@@ -40,25 +45,28 @@ function selectBoard(state: InitialStateType, action: SelectBoard) {
 }
 
 function moveTask(state: InitialStateType, action: MoveTask) {
-  const { taskToMove, fromColumnId, toColumnId } = action.payload;
-  const column = state.columns.find((column) => column.id === toColumnId);
+  const { taskIdsInOrder, toColumnId } = action.payload;
 
-  if (!column) return state;
+  const taskMap = taskIdsInOrder.reduce((map, taskId, index) => {
+    map[taskId] = index;
+    return map;
+  }, {} as Record<number, number>);
 
-  const newTaskss = state.tasks.map((task) => {
-    if (task.id === taskToMove.id) {
+  const updatedTasks = state.tasks.map((task) => {
+    if (task.id in taskMap) {
       return {
-        ...taskToMove,
+        ...task,
+        order: taskMap[task.id],
         columnId: toColumnId,
-        status: column.name,
       };
+    } else {
+      return task;
     }
-    return task;
   });
 
   return {
     ...state,
-    tasks: newTaskss,
+    tasks: updatedTasks,
   };
 }
 
@@ -104,5 +112,15 @@ function toggleSubtask(state: InitialStateType, action: ToggleSubTask) {
   return {
     ...state,
     subtasks: newSubtasks,
+  };
+}
+
+function setTaskBeingDragged(
+  state: InitialStateType,
+  action: SetTaskBeingDragged
+) {
+  return {
+    ...state,
+    taskIdBeingDragged: action.payload,
   };
 }

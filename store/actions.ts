@@ -7,6 +7,7 @@ export enum ActionType {
   UpdateTaskStatus,
   ToggleSubTask,
   CreateTask,
+  SetTaskBeingDragged,
 }
 
 export interface AddBoard {
@@ -25,9 +26,8 @@ export interface SelectBoard {
 export interface MoveTask {
   type: ActionType.MoveTask;
   payload: {
-    fromColumnId: number;
     toColumnId: number;
-    taskToMove: Task;
+    taskIdsInOrder: number[];
   };
 }
 
@@ -58,6 +58,12 @@ export type InitialStateType = {
   tasks: Task[];
   subtasks: SubTask[];
   board: Board | null;
+  taskIdBeingDragged: number | null;
+};
+
+export type SetTaskBeingDragged = {
+  type: ActionType.SetTaskBeingDragged;
+  payload: number | null;
 };
 
 export type BoardActions =
@@ -66,4 +72,5 @@ export type BoardActions =
   | MoveTask
   | UpdateTaskStatus
   | ToggleSubTask
-  | CreateTask;
+  | CreateTask
+  | SetTaskBeingDragged;

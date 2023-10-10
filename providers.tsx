@@ -12,17 +12,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
 }
 
 import { createContext, useReducer } from "react";
-import { Board, Column, SubTask, Task } from "./types";
 import { boardReducer } from "./store/reducers";
-import { BoardActions } from "./store/actions";
-
-type InitialStateType = {
-  boards: Board[];
-  columns: Column[];
-  tasks: Task[];
-  subtasks: SubTask[];
-  board: Board | null;
-};
+import { BoardActions, InitialStateType } from "./store/actions";
 
 const initialState = {
   boards,
@@ -30,6 +21,7 @@ const initialState = {
   tasks,
   subtasks,
   board: null,
+  taskIdBeingDragged: null,
 };
 
 export const BoardContext = createContext<InitialStateType>(initialState);

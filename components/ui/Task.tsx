@@ -1,8 +1,8 @@
-"use client";
-
 import { ColumnWithTasks, Task, TaskWithSubtasks } from "@/types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import TaskDetails from "./TaskDetails";
+import { BoardContext, BoardDispatchContext } from "@/providers";
+import { ActionType } from "@/store/actions";
 
 export default function Task({
   task,
@@ -12,6 +12,8 @@ export default function Task({
   column: ColumnWithTasks;
 }) {
   const [openDetails, setOpenDetails] = useState(false);
+  const dispatch = useContext(BoardDispatchContext);
+  const { taskIdBeingDragged } = useContext(BoardContext);
 
   const closeDetails = () => {
     setOpenDetails(false);
@@ -22,17 +24,21 @@ export default function Task({
   );
 
   const handleOnDragStart = (e: React.DragEvent, task: Task) => {
-    e.dataTransfer.setData(
-      "task",
-      JSON.stringify({ taskToMove: task, fromColumnId: column.id })
-    );
+    dispatch({
+      type: ActionType.SetTaskBeingDragged,
+      payload: task.id,
+    });
   };
 
   return (
     <>
       <li
-        className="w-[280px] cursor-pointer hover:text-primary px-4 py-6 bg-white dark:bg-gray-500 rounded-lg font-bold"
+        className={[
+          "task w-[280px] cursor-pointer hover:text-primary px-4 py-6 bg-white dark:bg-gray-500 rounded-lg font-bold",
+          taskIdBeingDragged === task.id ? "dragging" : "",
+        ].join(" ")}
         draggable
+        data-task-id={task.id}
         onDragStart={(e) => handleOnDragStart(e, task)}
         onClick={() => setOpenDetails(true)}
       >
