@@ -31,7 +31,7 @@ export default function CreateBoardForm({
           <Input
             name="title"
             value={name}
-            placeholder="e.g. Take a coffee break"
+            placeholder="e.g. Web Design"
             onChange={(e) => setName(e.target.value)}
           />
         </label>
@@ -42,7 +42,7 @@ export default function CreateBoardForm({
               <div key={index} className="flex gap-4 items-center">
                 <Input
                   value={columnText}
-                  placeholder="e.g. Make coffee"
+                  placeholder="e.g. Todo"
                   onChange={(e) =>
                     setColumns((previousState) =>
                       previousState.map((previousSubtask, previousIndex) => {
