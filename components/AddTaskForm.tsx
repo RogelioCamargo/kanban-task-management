@@ -1,5 +1,3 @@
-"use client";
-
 import { useContext, useState } from "react";
 import { BoardContext } from "@/providers";
 import Button from "./ui/Button";

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-import { BoardWithColumns } from "@/types";
 
 export default function EditBoardForm({
   board,
