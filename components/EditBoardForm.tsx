@@ -1,14 +1,26 @@
 import { useState } from "react";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
+import { BoardWithColumns } from "@/types";
 
-export default function CreateBoardForm({
+export default function EditBoardForm({
+  board,
   closeForm,
 }: {
+  board: {
+    id: number;
+    name: string;
+    columns: {
+      id: number;
+      name: string;
+    }[];
+  };
   closeForm: () => void;
 }) {
-  const [name, setName] = useState("");
-  const [columns, setColumns] = useState(["Todo", "Doing"]);
+  const [name, setName] = useState(board.name);
+  const [columns, setColumns] = useState(
+    board.columns.map((column) => column.name)
+  );
 
   const handleSubmit = () => {
     alert("Feature Not Implemented Yet");
@@ -23,7 +35,7 @@ export default function CreateBoardForm({
         onClick={closeForm}
       />
       <div className="text-xs font-bold bg-white dark:bg-gray-500 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-[480px] mx-auto rounded-md flex flex-col gap-6 p-6">
-        <h4 className="text-lg text-black dark:text-white">Add New Board</h4>
+        <h4 className="text-lg text-black dark:text-white">Edit Board</h4>
         <label className="text-gray-300">
           Name
           <Input
