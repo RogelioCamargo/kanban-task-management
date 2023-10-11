@@ -1,5 +1,3 @@
-"use client";
-
 import { BoardDispatchContext } from "@/providers";
 import { ActionType } from "@/store/actions";
 import { SubTask } from "@/types";
