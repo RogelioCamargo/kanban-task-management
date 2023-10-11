@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import Button from "./ui/Button";
 import { BoardContext } from "@/providers";
 import AddTaskForm from "./AddTaskForm";
+import { ChevronDownIcon, MobileCompanyIcon } from "./ui/Icons";
 
 export default function Header() {
   const { board } = useContext(BoardContext);
@@ -16,33 +17,12 @@ export default function Header() {
   return (
     <header className="flex justify-between text-gray-500 dark:text-white px-4 py-7 bg-white dark:bg-gray-500 h-16 md:h-20 border-b border-gray-200 dark:border-gray-400">
       <div className="flex items-center gap-4">
-        <svg
-          className="md:hidden"
-          width="24"
-          height="25"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g fill="#635FC7" fillRule="evenodd">
-            <rect width="6" height="25" rx="2" />
-            <rect opacity=".75" x="9" width="6" height="25" rx="2" />
-            <rect opacity=".5" x="18" width="6" height="25" rx="2" />
-          </g>
-        </svg>
+        <MobileCompanyIcon />
         <div className="flex items-center gap-2">
           <h1 className="text-lg font-bold">{board && board.name}</h1>
-          <svg
-            className="md:hidden"
-            width="10"
-            height="7"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke="#635FC7"
-              strokeWidth="2"
-              fill="none"
-              d="m1 1 4 4 4-4"
-            />
-          </svg>
+          <button className="md:hidden">
+            <ChevronDownIcon />
+          </button>
         </div>
       </div>
       <div className="flex items-center gap-4">
@@ -60,13 +40,7 @@ export default function Header() {
           </svg>
           <span className="hidden md:inline">+ Add New Task</span>
         </Button>
-        {/* <svg width="5" height="20" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#828FA3" fillRule="evenodd">
-            <circle cx="2.308" cy="2.308" r="2.308" />
-            <circle cx="2.308" cy="10" r="2.308" />
-            <circle cx="2.308" cy="17.692" r="2.308" />
-          </g>
-        </svg> */}
+        {/* <ExpandIcon /> */}
       </div>
       {openAddTaskForm && board ? (
         <AddTaskForm board={board} closeForm={closeForm} />

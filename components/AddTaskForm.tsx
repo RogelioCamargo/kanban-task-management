@@ -3,6 +3,7 @@ import { BoardContext } from "@/providers";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import { Board, Column } from "@/types";
+import { CancelIcon } from "./ui/Icons";
 
 export default function AddTaskForm({
   board,
@@ -97,28 +98,7 @@ export default function AddTaskForm({
                     );
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="none"
-                  >
-                    <rect
-                      x="12.728"
-                      width="3"
-                      height="18"
-                      transform="rotate(45 12.728 0)"
-                      fill="#828FA3"
-                    />
-                    <rect
-                      y="2.12134"
-                      width="3"
-                      height="18"
-                      transform="rotate(-45 0 2.12134)"
-                      fill="#828FA3"
-                    />
-                  </svg>
+                  <CancelIcon />
                 </button>
               </div>
             ))}
