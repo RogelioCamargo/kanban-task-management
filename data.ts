@@ -18,54 +18,63 @@ export const columns = [
     id: 11,
     name: "Todo",
     boardId: 1,
+    columnColor: "#a283aa",
     order: 1,
   },
   {
     id: 12,
     name: "Doing",
     boardId: 1,
+    columnColor: "#a6fc91",
     order: 2,
   },
   {
     id: 13,
     name: "Done",
     boardId: 1,
+    columnColor: "#ebd6ff",
     order: 3,
   },
   {
     id: 14,
     name: "Todo",
     boardId: 2,
+    columnColor: "#f6f980",
     order: 1,
   },
   {
     id: 15,
     name: "Doing",
     boardId: 2,
+    columnColor: "#a8c9da",
     order: 2,
   },
   {
     id: 16,
     name: "Done",
     boardId: 2,
+    columnColor: "#ff94e2",
     order: 3,
   },
   {
     id: 17,
     name: "Now",
     boardId: 3,
+    columnColor: "#bcebef",
     order: 1,
   },
   {
     id: 18,
     name: "Next",
     boardId: 3,
+    columnColor: "#cd8bae",
     order: 2,
   },
   {
     id: 19,
     name: "Later",
     boardId: 3,
+    columnColor: "#b297a9",
     order: 3,
   },
 ];
@@ -258,7 +267,6 @@ export const tasks = [
     order: 2,
   },
 ];
-
 
 export const subtasks = [
   {

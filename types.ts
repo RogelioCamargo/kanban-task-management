@@ -22,6 +22,7 @@ export interface Column {
   id: number;
   name: string;
   boardId: number;
+  columnColor: string;
   order: number;
 }
 

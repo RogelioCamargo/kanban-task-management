@@ -6,7 +6,6 @@ import { ActionType } from "@/store/actions";
 import { findAfterElement } from "@/utils";
 
 export default function Column({ column }: { column: ColumnWithTasks }) {
-  const columnColor = Math.floor(Math.random() * 16777215).toString(16);
   const dispatch = useContext(BoardDispatchContext);
   const { taskIdBeingDragged } = useContext(BoardContext);
 
@@ -68,7 +67,7 @@ export default function Column({ column }: { column: ColumnWithTasks }) {
       <div className="flex gap-2 items-center mb-6">
         <div
           className="h-4 w-4 rounded-full"
-          style={{ backgroundColor: `#${columnColor}` }}
+          style={{ backgroundColor: `${column.columnColor}` }}
         ></div>
         <h2 className="text-xs uppercase font-bold tracking-[2.4px]">
           {column.name} ({column.tasks.length})
