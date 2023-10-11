@@ -29,15 +29,16 @@ export default function Header() {
     <header className="flex justify-between text-gray-500 dark:text-white px-4 py-7 bg-white dark:bg-gray-500 h-16 md:h-20 border-b border-gray-200 dark:border-gray-400">
       <div className="flex items-center gap-4">
         <MobileCompanyIcon />
-        <div className="flex items-center gap-2">
+        <h1 className="hidden md:block text-lg font-bold">
+          {board && board.name}
+        </h1>
+        <button
+          className="md:hidden flex items-center gap-2"
+          onClick={() => setOpenMenu((previousState) => !previousState)}
+        >
           <h1 className="text-lg font-bold">{board && board.name}</h1>
-          <button
-            className="md:hidden"
-            onClick={() => setOpenMenu((previousState) => !previousState)}
-          >
-            <ChevronDownIcon />
-          </button>
-        </div>
+          <ChevronDownIcon />
+        </button>
       </div>
       <div className="flex items-center gap-4">
         <Button onClick={() => setOpenAddTaskForm(true)}>
