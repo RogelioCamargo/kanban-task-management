@@ -23,6 +23,8 @@ This task management app is designed to help you stay organized and manage your 
 
 ## Getting Started
 
+Run the following:
+
 ```
 npm install
 
